@@ -15,6 +15,9 @@ class ToDo(db.Model):
     completed=db.Column(db.Integer,default=0)
     def __repr__(self):
         return '<Task %r>' % self.id 
+@app.before_first_request
+def create_tables():
+    db.create_all()
 
 @app.route('/',methods=['POST','GET'])
 def index():
@@ -57,6 +60,6 @@ def update(id):
             return "There was an issue in upating the task"
     else:
         return render_template('update.html',task=task)
-if(__name__=="__main__"):
-     with app.app_context():
-         db.create_all()
+# if(__name__=="__main__"):
+#      with app.app_context():
+#          db.create_all()
