@@ -15,7 +15,7 @@ class ToDo(db.Model):
     completed=db.Column(db.Integer,default=0)
     def __repr__(self):
         return '<Task %r>' % self.id 
-@app.before_first_request
+@app.before_request
 def create_tables():
     db.create_all()
 
